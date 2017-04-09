@@ -18,5 +18,5 @@ img2vector
 # ignore data files
 data/
 
-# ignore jpg files produced by programs
-*.jpg
+# ignore csv files produced by program
+*.csv

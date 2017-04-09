@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <fstream>
 #include <dirent.h>
 #include <opencv2/opencv.hpp>
 using namespace std;
@@ -60,8 +61,13 @@ int main(int argc, char **argv) {
     exit(-1);
   }
 
-  vector<string> files = fetchJpegFiles(argv[1]);
-  vector< vector<double> > data;
+  vector<string> files  = fetchJpegFiles(argv[1]);
+  string outputFilename = argv[2];
+
+  vector< vector<double> > data;  // data variable to hold output
+  ofstream fs;                    // file output stream
+
+  fs.open(outputFilename.c_str());
 
   // Store in vector
   for(int i = 0; i < files.size(); i++) {
@@ -72,6 +78,18 @@ int main(int argc, char **argv) {
   // Print to csv
   for(int i = 0; i < data.size(); i++) {
     for(int j = 0; j < data.at(i).size(); j++) {
+      fs << data.at(i).at(j);
+
+      if(j != (data.at(i).size() - 1)) {
+        fs << ",";
+      } else {
+        fs << endl;
+      }
     }
   }
+
+  fs.close();
+
+  cout << "Done." << endl;
+  return 0;
 }
