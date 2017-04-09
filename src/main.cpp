@@ -1,7 +1,9 @@
 #include <iostream>
 #include <vector>
 #include <dirent.h>
+#include <opencv2/opencv.hpp>
 using namespace std;
+using namespace cv;
 
 void printSyntax() {
   cout << "Syntax:" << endl;
@@ -33,6 +35,25 @@ vector<string> fetchJpegFiles(string path) {
   return files;
 }
 
+vector<double> matToVector(Mat m, bool normalized) {
+  assert(m.channels() == 1);
+  vector<double> data;
+
+  for(int r = 0; r < m.rows; r++) {
+    for(int c = 0; c < m.cols; c++) {
+      double val = (double)m.at<uchar>(r, c);
+
+      if(normalized) {
+        val = val / 255;
+      }
+
+      data.push_back(val);
+    }
+  }
+
+  return data;
+}
+
 int main(int argc, char **argv) {
   if(argc != 3) {
     printSyntax();
@@ -40,7 +61,17 @@ int main(int argc, char **argv) {
   }
 
   vector<string> files = fetchJpegFiles(argv[1]);
+  vector< vector<double> > data;
+
+  // Store in vector
   for(int i = 0; i < files.size(); i++) {
-    cout << files.at(i) << endl;
+    Mat m = imread(files.at(i), 0);
+    data.push_back(matToVector(m, true));
+  }
+
+  // Print to csv
+  for(int i = 0; i < data.size(); i++) {
+    for(int j = 0; j < data.at(i).size(); j++) {
+    }
   }
 }
