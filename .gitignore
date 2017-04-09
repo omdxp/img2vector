@@ -1,0 +1,22 @@
+# ignore vim garbage
+*.swp
+*.swo
+*.swn
+
+# ignore cmake garbage
+CMakeCache.txt
+cmake_install.cmake
+CMakeFiles/
+
+logs/
+
+# ignore binaries
+img2vector
+
+# ignore config file to allow developers to include their own config for testing
+
+# ignore data files
+data/
+
+# ignore jpg files produced by programs
+*.jpg
