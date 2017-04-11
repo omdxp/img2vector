@@ -21,6 +21,8 @@ data/
 # ignore csv files produced by program
 *.csv
 
+Makefile
+
 
 # Created by https://www.gitignore.io/api/snapcraft
 
