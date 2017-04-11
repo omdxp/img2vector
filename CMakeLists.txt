@@ -9,7 +9,9 @@ find_package(OpenCV REQUIRED)
 # main app
 add_executable(
   img2vector
-  src/main.cpp
+  main.cpp
 )
 
 target_link_libraries(img2vector ${OpenCV_LIBS})
+
+install(TARGETS img2vector RUNTIME DESTINATION bin) 

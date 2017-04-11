@@ -20,3 +20,15 @@ data/
 
 # ignore csv files produced by program
 *.csv
+
+
+# Created by https://www.gitignore.io/api/snapcraft
+
+### Snapcraft ###
+# Snapcraft
+parts/
+prime/
+stage/
+*.snap
+
+# End of https://www.gitignore.io/api/snapcraft

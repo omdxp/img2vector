@@ -1,0 +1,27 @@
+name: img2vector
+version: '0.1'
+summary: Tool to convert a directory of images to a vector of normalized pixel values.
+description: |
+  This tool is used to convert a set of jpeg images to a vector of normalized pixel values. Usually used as a preprocessing step for machine learning/pattern recognition.
+
+grade: devel
+confinement: devmode
+
+apps:
+  img2vector:
+    command: img2vector
+
+parts:
+  opencv-snap:
+    plugin: cmake
+    configflags: [-DCMAKE_INSTALL_PREFIX=/usr, -DWITH_CUDA=OFF]
+    build-packages:
+      - build-essential
+      - cmake
+    source: https://github.com/opencv/opencv/archive/3.2.0.tar.gz
+  img2vector-snap:
+    plugin: cmake
+    source: https://github.com/ralampay/img2vector
+    source-type: git
+    after:
+      - opencv-snap
